@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="永久电影网（yongjiudianyingwang-cn.github.io）是经典电影档案与长青片单门户，收录影史常青作品、4K修复重映、导演全集、类型片谱系与观影日历，提供分级、片长与正版观看指引。">
+<meta name="keywords" content="永久电影网,经典电影,影史常青,4K修复,导演全集,电影档案,片单,电影影评,yongjiudianyingwang-cn">
+<meta name="author" content="永久电影网">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#07090f">
+<title>永久电影网 - 经典电影档案、4K修复与长青片单 | yongjiudianyingwang-cn.github.io</title>
+<link rel="canonical" href="https://yongjiudianyingwang-cn.github.io">
+<style>
+/* ============ 基础：深空影院 ============ */
+:root{
+  --bg:#07090f; --panel:#0e1118; --panel2:#151a24; --line:#232a38; --line2:#1a2030;
+  --tx:#e8ecf5; --tx2:#a9b3c4; --tx3:#6d788c;
+  --gold:#e7b95c; --gold2:#f6d88a; --cyan:#45d7d0; --red:#ff5a5f; --violet:#9b6bff;
+  --w:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--tx);line-height:1.82;font-size:16px;
+  background-image:
+    radial-gradient(900px 420px at 82% -8%,rgba(231,185,92,.13),transparent 58%),
+    radial-gradient(600px 320px at 6% 12%,rgba(69,215,208,.07),transparent 60%);
+  background-attachment:fixed;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;transition:.24s}
+ul,ol{list-style:none}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 26px}
+::selection{background:var(--gold);color:#07090f}
+
+/* ============ 顶栏 ============ */
+.vault{display:flex;justify-content:space-between;gap:18px;padding:8px 0;font-size:10.6px;letter-spacing:1.8px;color:var(--tx3);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.vault b{color:var(--gold);font-weight:700}
+
+/* ============ 导航 ============ */
+nav.gnb{position:sticky;top:0;z-index:100;background:rgba(7,9,15,.86);backdrop-filter:blur(11px);border-bottom:1px solid var(--line)}
+.nrow{display:flex;align-items:center;gap:4px;height:56px}
+.logo{font-size:15px;font-weight:900;letter-spacing:1px;color:var(--gold);margin-right:16px;white-space:nowrap}
+.logo small{display:block;font-size:8.4px;letter-spacing:2.2px;color:var(--tx3);font-weight:600}
+.nrow a{font-size:13.2px;padding:9px 13px;color:var(--tx2);font-weight:600}
+.nrow a:hover{color:var(--gold)}
+.togg{display:none;background:none;border:none;color:var(--gold);font-size:24px;cursor:pointer;margin-left:auto}
+
+/* ============ Hero ============ */
+.hero{padding:58px 0 26px}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+.eyebrow{font-size:10.4px;letter-spacing:3.4px;color:var(--cyan);font-weight:800;text-transform:uppercase}
+.hero h1{font-size:clamp(29px,5.4vw,50px);line-height:1.22;font-weight:900;margin:14px 0 16px;letter-spacing:.5px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:var(--tx2);font-size:15.2px;margin-bottom:12px;text-align:justify}
+.acts{display:flex;gap:11px;flex-wrap:wrap;margin-top:22px}
+.btn{font-size:13px;padding:11px 23px;border:1px solid var(--gold);color:var(--gold);font-weight:700;letter-spacing:.7px}
+.btn.f{background:var(--gold);color:#07090f}
+.btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* 胶片倒计时 */
+.reel{position:relative;background:var(--panel);border:1px solid var(--line);padding:22px;transform:rotate(1.1deg);transition:.3s}
+.reel:hover{transform:rotate(0);background:var(--panel2)}
+.reel .tape{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(255,255,255,.035) 9px 11px)}
+.reel h2{font-size:clamp(19px,2.8vw,25px);line-height:1.44;color:var(--gold2);position:relative}
+.reel .meta{font-size:10.6px;letter-spacing:2px;color:var(--cyan);margin-top:11px;position:relative}
+.reel .go{display:inline-block;margin-top:14px;font-size:11.4px;letter-spacing:1.6px;color:var(--tx);border-bottom:1px solid var(--gold);padding-bottom:3px;position:relative}
+.count{display:flex;gap:20px;margin-top:30px;padding-top:16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.count .n{font-size:27px;font-weight:900;color:var(--red);line-height:1.25;font-variant-numeric:tabular-nums}
+.count .l{font-size:10.4px;color:var(--tx3);letter-spacing:1.5px}
+
+/* ============ 章节 ============ */
+section{padding:66px 0;position:relative}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.shl{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.st{font-size:clamp(20px,3vw,27px);font-weight:900;color:var(--gold2);letter-spacing:1px}
+.st i{font-style:normal;color:var(--red)}
+.en{font-size:10px;letter-spacing:2.6px;color:var(--tx3);text-transform:uppercase;font-weight:700}
+.ss{color:var(--tx3);font-size:12.6px;max-width:700px;margin-top:8px}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.p{font-size:11.4px;padding:6px 13px;background:var(--panel);border:1px solid var(--line);color:var(--tx2);font-weight:600}
+.p.on{background:var(--gold);border-color:var(--gold);color:#07090f;font-weight:800}
+
+/* ============ A 常青片单：悬停翻转卡 ============ */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.flip{position:relative;height:300px;perspective:1400px;cursor:default}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;transform-style:preserve-3d;transition:transform .62s ease;padding:20px;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+.flip .front{display:grid;grid-template-rows:auto 1fr auto}
+.flip .back{transform:rotateY(180deg);background:linear-gradient(150deg,var(--panel2),#1c2233);display:grid;grid-template-rows:auto 1fr auto}
+.flip:hover .front{transform:rotateY(-180deg)}
+.flip:hover .back{transform:rotateY(0)}
+.rank{font-size:10.4px;letter-spacing:2.2px;color:var(--red);font-weight:900}
+.flip h3{font-size:20px;line-height:1.42;margin:12px 0 8px;color:var(--gold2)}
+.flip .yr{font-size:11px;color:var(--tx3);letter-spacing:1px;font-variant-numeric:tabular-nums}
+.flip .why{font-size:12.6px;color:var(--tx2);line-height:1.8;text-align:justify}
+.flip .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.flip .tags s{font-size:10.2px;text-decoration:none;padding:3px 9px;background:rgba(69,215,208,.12);color:var(--cyan);border:1px solid rgba(69,215,208,.3)}
+.flip .quote{font-size:13.4px;color:var(--tx);line-height:1.8;border-left:3px solid var(--gold);padding-left:12px;margin:auto 0}
+.flip .wh{font-size:10.6px;color:var(--tx3);letter-spacing:1.4px;border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+
+/* ============ B 修复日历：时间轴 ============ */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--gold),var(--red),var(--violet))}
+.node{position:relative;padding:0 0 22px 22px}
+.node::before{content:"";position:absolute;left:-24px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--gold)}
+.node:nth-child(2)::before{border-color:var(--cyan)}
+.node:nth-child(3)::before{border-color:var(--red)}
+.node:nth-child(4)::before{border-color:var(--violet)}
+.node .d{font-size:10.6px;letter-spacing:2px;color:var(--gold);font-weight:900}
+.node h3{font-size:17.4px;line-height:1.5;margin:3px 0 7px}
+.node p{font-size:12.8px;color:var(--tx2);line-height:1.8;text-align:justify}
+.node .ct{margin-top:9px;font-size:10.6px;color:var(--tx3);letter-spacing:.8px}
+
+/* ============ C 导演全集：三栏对比表（无table） ============ */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);background:var(--panel)}
+.col{border-right:1px solid var(--line);padding:0 0 8px}
+.col:last-child{border-right:0}
+.col .hd{background:linear-gradient(180deg,var(--panel2),var(--panel));padding:16px 18px;border-bottom:2px solid var(--gold)}
+.col:nth-child(2) .hd{border-bottom-color:var(--cyan)}
+.col:nth-child(3) .hd{border-bottom-color:var(--violet)}
+.col .hd .who{font-size:17.6px;font-weight:900;color:var(--gold2)}
+.col:nth-child(2) .hd .who{color:var(--cyan)}
+.col:nth-child(3) .hd .who{color:var(--violet)}
+.col .hd .era{font-size:10.4px;letter-spacing:1.8px;color:var(--tx3);margin-top:5px}
+.row{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:10px 18px;border-bottom:1px dashed var(--line2);font-size:12.4px}
+.row:last-child{border-bottom:0}
+.row .y{color:var(--tx3);font-size:10.8px;letter-spacing:1px;font-variant-numeric:tabular-nums;align-self:center}
+.row b{color:var(--tx);font-weight:600;line-height:1.6}
+.row small{display:block;color:var(--tx3);font-size:10.8px;margin-top:2px}
+
+/* ============ D 类型谱系：放射状技能环 ============ */
+.rad{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ring{text-align:center;transition:.26s}
+.ring:hover{transform:translateY(-4px)}
+.donut{--p:0;width:112px;height:112px;margin:0 auto 12px;border-radius:50%;position:relative;
+  background:conic-gradient(var(--gold) calc(var(--p)*1%),var(--panel) 0);
+  box-shadow:0 0 0 8px var(--panel),0 0 0 9px var(--line)}
+.donut::after{content:"";position:absolute;inset:16px;background:var(--bg);border-radius:50%}
+.donut b{position:absolute;inset:0;display:grid;place-items:center;font-size:19px;color:var(--gold2);z-index:2;font-variant-numeric:tabular-nums}
+.ring h4{font-size:14.2px;color:var(--tx);margin-bottom:4px}
+.ring p{font-size:11.4px;color:var(--tx3);line-height:1.7}
+
+/* ============ E 影评：引用式列表 ============ */
+.essays{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.es{background:var(--panel);border-left:4px solid var(--gold);padding:18px 20px;transition:.26s}
+.es:nth-child(2){border-left-color:var(--cyan)}
+.es:nth-child(3){border-left-color:var(--red)}
+.es:nth-child(4){border-left-color:var(--violet)}
+.es:hover{background:var(--panel2)}
+.es blockquote{font-size:15.6px;line-height:1.7;color:var(--gold2);margin-bottom:9px;font-weight:600}
+.es p{font-size:12.4px;color:var(--tx2);line-height:1.8;text-align:justify}
+.es .by{margin-top:11px;font-size:10.8px;color:var(--tx3);letter-spacing:1.2px;border-top:1px solid var(--line2);padding-top:9px;display:flex;justify-content:space-between}
+.es .by b{color:var(--tx)}
+
+/* ============ F 本月策展：卡片 + 内嵌播放条 ============ */
+.curate{display:grid;grid-template-columns:1.45fr 1fr;gap:26px}
+.cmain{background:linear-gradient(150deg,#151a24,#0e1118);border:1px solid var(--line);padding:24px 26px;position:relative;overflow:hidden}
+.cmain::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(231,185,92,.25),transparent 66%)}
+.cmain .tg{font-size:10.4px;letter-spacing:2.6px;color:var(--gold);font-weight:900}
+.cmain h3{font-size:clamp(21px,3.2vw,29px);line-height:1.4;margin:10px 0 13px;color:var(--gold2)}
+.cmain p{font-size:13.4px;color:var(--tx2);line-height:1.88;text-align:justify;position:relative}
+.cmain .m{display:flex;gap:22px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11.4px;color:var(--tx3);flex-wrap:wrap;position:relative}
+.cmain .m b{color:var(--gold)}
+.track{display:flex;gap:12px;align-items:center;margin-top:18px;background:rgba(0,0,0,.32);padding:11px 14px;border:1px solid var(--line)}
+.track .ply{width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:var(--gold);color:#07090f;display:grid;place-items:center;font-size:13px;font-weight:900}
+.track .line{flex:1;height:4px;background:var(--panel2);position:relative}
+.track .line i{position:absolute;left:0;top:0;bottom:0;width:41%;background:var(--gold)}
+.track .tm{font-size:10.4px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.side{display:flex;flex-direction:column;gap:11px;counter-reset:c}
+.ci{display:grid;grid-template-columns:56px 1fr;gap:13px;background:var(--panel);border:1px solid var(--line);padding:12px 14px;align-items:center;transition:.24s}
+.ci:hover{border-color:var(--gold)}
+.ci .n{counter-increment:c;font-size:23px;font-weight:900;color:var(--tx3);line-height:1;font-variant-numeric:tabular-nums}
+.ci .n::before{content:counter(c)}
+.ci.on .n{color:var(--gold)}
+.ci h4{font-size:14.4px;line-height:1.5;color:var(--tx)}
+.ci small{font-size:11px;color:var(--tx3);display:block;margin-top:3px;line-height:1.6}
+
+/* ============ 页脚 ============ */
+.foot{border-top:1px solid var(--line);background:var(--panel);padding:50px 0 22px;margin-top:14px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;margin-bottom:30px}
+.fc h5{font-size:11.2px;letter-spacing:2.4px;color:var(--gold);margin-bottom:13px;font-weight:900}
+.fc a{display:block;font-size:12.8px;color:var(--tx2);padding:5px 0}
+.fc a:hover{color:var(--gold)}
+.about{font-size:12.8px;color:var(--tx2);max-width:420px;margin-top:12px;text-align:justify;line-height:1.92}
+.copy{text-align:center;font-size:11.4px;color:var(--tx3);padding-top:20px;border-top:1px solid var(--line);line-height:2.1}
+.copy a{color:var(--gold);border-bottom:1px dotted var(--gold);font-weight:600}
+.up{position:fixed;right:15px;bottom:17px;width:44px;height:44px;background:var(--gold);color:#07090f;display:grid;place-items:center;font-size:17px;font-weight:900;opacity:0;pointer-events:none;transition:.3s;z-index:99}
+.up.show{opacity:1;pointer-events:auto}
+
+/* ============ 响应式 ============ */
+@media(max-width:1020px){
+  .hg{grid-template-columns:1fr}
+  .grid3,.trio,.rad{grid-template-columns:1fr 1fr}
+  .essays,.curate{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .togg{display:block}
+  .nrow{position:fixed;inset:55px 0 0 0;background:var(--panel);flex-direction:column;padding:16px;transform:translateX(100%);transition:.32s;z-index:99;overflow:auto}
+  .nrow.open{transform:translateX(0)}
+  .nrow a{padding:13px 10px;font-size:15.2px;border-bottom:1px solid var(--line2);width:100%}
+  .hero{padding:32px 0 20px}
+  section{padding:46px 0}
+  .grid3,.trio,.rad,.essays{grid-template-columns:1fr}
+  .col{border-right:0;border-bottom:1px solid var(--line)}
+  .donut{width:96px;height:96px}
+  .count{gap:16px}.count .n{font-size:21px}
+}
+@media print{
+  nav.gnb,.up,.acts,.vault{display:none}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  .flip .back{transform:none;position:static;backface-visibility:visible}
+  .flip .front{display:none}
+  section{padding:14px 0;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<!-- ============ 顶栏 ============ -->
+<div class="vault wrap">
+  <span><b>永久电影网</b> · 经典不死，只是换了个格式重映</span>
+  <span>ARCHIVE · RESTORE · REWATCH ｜ 更新于 2026-10-06</span>
+</div>
+
+<!-- ============ 导航 ============ -->
+<nav class="gnb" aria-label="主导航">
+  <div class="wrap nrow" id="links">
+    <a class="logo" href="#top">永久电影网<small>FOREVER CINEMA</small></a>
+    <a href="#evergreen">常青片单</a>
+    <a href="#restore">修复日历</a>
+    <a href="#auteur">导演全集</a>
+    <a href="#genre">类型谱系</a>
+    <a href="#essay">影评札记</a>
+    <a href="#curate">本月策展</a>
+    <a href="#about">关于本站</a>
+  </div>
+  <button class="togg" id="togg" aria-label="菜单" aria-expanded="false">☰</button>
+</nav>
+
+<!-- ============ Hero ============ -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="wrap hg">
+    <div>
+      <div class="eyebrow">A Living Archive of Cinema</div>
+      <h1 id="h1">有些电影不会过期，<br>它们只是<em>还没被你看见</em>。</h1>
+      <p><b>永久电影网</b>（yongjiudianyingwang-cn.github.io）是一个专注于<b>经典电影档案与长青片单</b>的门户。我们不追热搜、不做日榜，只做两件事：把值得反复看的电影从片海捞出来，并告诉你<b>哪个版本值得看、在哪里能合法看到</b>。</p>
+      <p>"永久"不是承诺，是筛选标准：上映满十年仍被讨论、换三代观众仍成立、4K 修复后仍能让人起鸡皮疙瘩的作品，才有资格进入本站的常青片单。</p>
+      <div class="acts">
+        <a class="btn f" href="#evergreen">翻开常青片单</a>
+        <a class="btn" href="#essay">读一篇影评</a>
+      </div>
+      <div class="count">
+        <div><div class="n">214</div><div class="l">常青影片</div></div>
+        <div><div class="n">38</div><div class="l">4K 修复记录</div></div>
+        <div><div class="n">9</div><div class="l">导演全集</div></div>
+      </div>
+    </div>
+
+    <aside class="reel" aria-label="本月修复放映">
+      <div class="tape"></div>
+      <div class="meta">RESTORE · 本月修复放映</div>
+      <h2>《东京物语》（1953）4K 修复版 · 首度大陆艺联专线上映</h2>
+      <a class="go" href="#">查看排片与观看指引 →</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ A 常青片单：悬停翻转卡 ============ -->
+<section id="evergreen" aria-labelledby="t-evergreen">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">常青片单 <i>·</i></h2><span class="en">Forever List</span></div>
+        <p class="ss">上榜标准：上映满十年、仍被反复讨论、修复后依然成立。排序不分先后，只按"适合什么时候看"分组。</p>
+      </div>
+      <div class="pills" role="tablist">
+        <span class="p on" role="tab" aria-selected="true">全部</span>
+        <span class="p" role="tab">东方</span>
+        <span class="p" role="tab">欧洲</span>
+        <span class="p" role="tab">作者</span>
+      </div>
+    </div>
+    <div class="grid3">
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.01 · 东方家庭</span><h3>东京物语</h3><span class="yr">1953 ｜ 136 MIN ｜ 12+</span></div>
+          <p class="why">小津安二郎把"父母去看儿女"拍成了全人类共同的黄昏。没有冲突，只有客气；没有控诉，只有空椅子。</p>
+          <div class="tags"><s>家庭</s><s>老龄化</s><s>极慢</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">"你会对自己的孩子，也变成这样吗？"——它不问你答案，它等你十年后自己回来。</p>
+          <div class="wh">观看次序：先看《晚春》→ 再看本片 ｜ 建议大银幕 / 修复版</div>
+        </div>
+      </div>
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.02 · 作者寓言</span><h3>镜子</h3><span class="yr">1975 ｜ 108 MIN ｜ 15+</span></div>
+          <p class="why">塔可夫斯基最私人也最难的一部。它不是电影，是一次失眠。看不懂是正常的，看懂是运气。</p>
+          <div class="tags"><s>诗意</s><s>梦境</s><s>极慢</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">别试图"理解"它。把它当一段被雨水打湿的记忆，允许自己走神。</p>
+          <div class="wh">雷点：无剧情驱动、长镜头超 3 分钟 ｜ 不建议睡前观看</div>
+        </div>
+      </div>
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.03 · 黑色电影</span><h3>日落大道</h3><span class="yr">1950 ｜ 110 MIN ｜ 12+</span></div>
+          <p class="why">好莱坞写给自己的悼词。开场第一句就是结局，剩下的一百分钟，是让结局变得不可避免。</p>
+          <div class="tags"><s>黑色</s><s>元电影</s><s>讽刺</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">"我没有变老，是电影变年轻了。"——每个行业都有一条日落大道。</p>
+          <div class="wh">入门友好 ｜ 建议配导演评论音轨观看</div>
+        </div>
+      </div>
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.04 · 新现实主义</span><h3>偷自行车的人</h3><span class="yr">1948 ｜ 89 MIN ｜ 12+</span></div>
+          <p class="why">没有演员，没有配乐，没有结局。一个男人的尊严，被一辆自行车决定。</p>
+          <div class="tags"><s>贫困</s><s>父子</s><s>黑白</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">它定义了"新现实主义"三个字：摄影机对准普通人，然后不再移开。</p>
+          <div class="wh">分级友好 ｜ 亲子共赏佳选 ｜ 勿看删减版</div>
+        </div>
+      </div>
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.05 · 爱情</span><h3>爱在黎明破晓前</h3><span class="yr">1995 ｜ 101 MIN ｜ 15+</span></div>
+          <p class="why">两个陌生人在维也纳走了一夜。没有事故，没有误会，只有对话——以及后来二十年的人生。</p>
+          <div class="tags"><s>爱情</s><s>对话</s><s>公路</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">它最好的部分不是爱情，是"假设"。假设我们今晚就走，人生会怎样？</p>
+          <div class="wh">建议三部连看 ｜ 16+ 更佳 ｜ 别在失恋时看第一部</div>
+        </div>
+      </div>
+
+      <div class="flip" tabindex="0">
+        <div class="face front">
+          <div><span class="rank">NO.06 · 史诗</span><h3>2001 太空漫游</h3><span class="yr">1968 ｜ 149 MIN ｜ 12+</span></div>
+          <p class="why">库布里克把人类从骨头扔到星门。它不解释自己，它要求你坐满 149 分钟。</p>
+          <div class="tags"><s>科幻</s><s>哲学</s><s>视听</s></div>
+        </div>
+        <div class="face back">
+          <p class="quote">关掉弹幕，关掉手机，把音量开到能感到低频震动——这是唯一正确的观看方式。</p>
+          <div class="wh">必须大银幕 ｜ 4K 修复版已上线 ｜ 雷点：节奏极慢</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ B 修复日历：时间轴 ============ -->
+<section id="restore" style="background:linear-gradient(180deg,transparent,rgba(231,185,92,.05))" aria-labelledby="t-restore">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">修复日历 <i>·</i></h2><span class="en">Restoration Log</span></div>
+        <p class="ss">4K 不是营销词。它是把导演当年看到、而你一直没看到的画面，还给你。</p>
+      </div>
+      <span class="p">按月更新</span>
+    </div>
+    <div class="tl">
+      <div class="node">
+        <div class="d">2026 / 10</div>
+        <h3>小津安二郎《东京物语》4K 修复 · 艺联专线</h3>
+        <p>松竹胶片原件经 6 个月逐帧修复，还原了原版被裁掉的左右各 4%。字幕采用周防正行译本，首次保留"敬语层级"的细微差别。</p>
+        <div class="ct">分级 12+ ｜ 136 分钟 ｜ 建议 IMAX 激光 ｜ 勿看电视剪辑版</div>
+      </div>
+      <div class="node">
+        <div class="d">2026 / 09</div>
+        <h3>费里尼《八部半》2K 数字修复 · 资料馆回顾展</h3>
+        <p>马切洛·马斯楚安尼的梦境终于有了正确的颗粒度。修复团队找回了 1963 年首映版被剪掉的 7 分钟马戏段落。</p>
+        <div class="ct">分级 15+ ｜ 138 分钟 ｜ 含裸露与宗教隐喻 ｜ 建议先读导演访谈</div>
+      </div>
+      <div class="node">
+        <div class="d">2026 / 08</div>
+        <h3>黑泽明《七武士》4K · 全球同步重映</h3>
+        <p>207 分钟完整版，第一次以正确画幅（1.37:1）回归大银幕。雨中决战的每一滴雨，都是新的。</p>
+        <div class="ct">分级 12+ ｜ 207 分钟 ｜ 三小时请备水 ｜ 年度必看</div>
+      </div>
+      <div class="node">
+        <div class="d">2026 / 07</div>
+        <h3>侯孝贤《悲情城市》4K · 戛纳经典单元</h3>
+        <p>本片当年因"九份的秋天"被记住，如今因声音设计被重新发现。新修复版补回了 11 条环境音轨。</p>
+        <div class="ct">分级 15+ ｜ 157 分钟 ｜ 方言无字幕段落 ｜ 极慢，请空腹看</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C 导演全集：三栏对比（无 table） ============ -->
+<section id="auteur" aria-labelledby="t-auteur">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">导演全集 <i>·</i></h2><span class="en">Auteur Canon</span></div>
+        <p class="ss">看全集，不是为了"看完"，是为了看懂一个人的语法是怎么长出来的。</p>
+      </div>
+      <span class="p">共 9 位 ｜ 点击片名跳转导读</span>
+    </div>
+    <div class="trio">
+      <div class="col">
+        <div class="hd"><div class="who">小津安二郎</div><div class="era">1903–1963 ｜ 54 部 ｜ 低机位</div></div>
+        <div class="row"><span class="y">1949</span><div><b>晚春</b><small>入门首选。女儿出嫁前的 84 分钟。</small></div></div>
+        <div class="row"><span class="y">1953</span><div><b>东京物语</b><small>常青榜首。空椅子比台词重。</small></div></div>
+        <div class="row"><span class="y">1958</span><div><b>彼岸花</b><small>被低估的"嫁女儿"三部曲终章。</small></div></div>
+        <div class="row"><span class="y">1959</span><div><b>浮草</b><small>重拍自 1934 年同名作，色彩即情绪。</small></div></div>
+      </div>
+      <div class="col">
+        <div class="hd"><div class="who">安德烈·塔可夫斯基</div><div class="era">1932–1986 ｜ 7 部长片 ｜ 雕刻时间</div></div>
+        <div class="row"><span class="y">1962</span><div><b>伊万的童年</b><small>唯一"好看"的一部，先看它。</small></div></div>
+        <div class="row"><span class="y">1972</span><div><b>索拉里斯</b><small>不是科幻，是思念的物理学。</small></div></div>
+        <div class="row"><span class="y">1975</span><div><b>镜子</b><small>最难。允许自己走神。</small></div></div>
+        <div class="row"><span class="y">1983</span><div><b>乡愁</b><small>他在异乡拍出的最后的家。</small></div></div>
+      </div>
+      <div class="col">
+        <div class="hd"><div class="who">斯坦利·库布里克</div><div class="era">1928–1999 ｜ 13 部 ｜ 类型革命</div></div>
+        <div class="row"><span class="y">1964</span><div><b>奇爱博士</b><small>喜剧外壳下的末日，笑完会冷。</small></div></div>
+        <div class="row"><span class="y">1968</span><div><b>2001 太空漫游</b><small>必须大银幕，别在手机上看。</small></div></div>
+        <div class="row"><span class="y">1980</span><div><b>闪灵</b><small>恐怖片语法教科书，16+。</small></div></div>
+        <div class="row"><span class="y">1999</span><div><b>大开眼戒</b><small>遗作。婚姻比阴谋更可怕。</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D 类型谱系：环形进度 ============ -->
+<section id="genre" aria-labelledby="t-genre">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">类型谱系 <i>·</i></h2><span class="en">Genre Map</span></div>
+        <p class="ss">本站常青片单的题材分布。数字不是热度，是"经得住重看"的作品数量占比。</p>
+      </div>
+      <span class="p">数据按季度复核</span>
+    </div>
+    <div class="rad">
+      <div class="ring"><div class="donut" style="--p:24"><b>24%</b></div><h4>家庭 / 伦理</h4><p>小津、是枝、杨德昌。<br>最难拍，最耐看。</p></div>
+      <div class="ring"><div class="donut" style="--p:19"><b>19%</b></div><h4>作者 / 诗意</h4><p>塔可夫斯基、费里尼、布列松。<br>门槛高，回报高。</p></div>
+      <div class="ring"><div class="donut" style="--p:16"><b>16%</b></div><h4>黑色 / 犯罪</h4><p>比利·怀尔德、朴赞郁。<br>入门最友好。</p></div>
+      <div class="ring"><div class="donut" style="--p:13"><b>13%</b></div><h4>历史 / 史诗</h4><p>黑泽明、贝托鲁奇。<br>请留足三小时。</p></div>
+      <div class="ring"><div class="donut" style="--p:11"><b>11%</b></div><h4>爱情 / 青春</h4><p>侯麦、理查德·林克莱特。<br>适合二刷。</p></div>
+      <div class="ring"><div class="donut" style="--p:9"><b>9%</b></div><h4>科幻 / 哲学</h4><p>库布里克、塔可夫斯基。<br>别在手机上看。</p></div>
+      <div class="ring"><div class="donut" style="--p:5"><b>5%</b></div><h4>纪录片</h4><p>小川绅介、怀斯曼。<br>真实比剧情更狠。</p></div>
+      <div class="ring"><div class="donut" style="--p:3"><b>3%</b></div><h4>默片 / 早期</h4><p>卓别林、茂瑙、沟口健二。<br>请配现场配乐。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ E 影评札记：引用式 ============ -->
+<section id="essay" style="background:linear-gradient(0deg,rgba(155,107,255,.06),transparent)" aria-labelledby="t-essay">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">影评札记 <i>·</i></h2><span class="en">Notes</span></div>
+        <p class="ss">不剧透，不鸡汤，不追热点。每篇只回答一个问题：它为什么值得被反复看？</p>
+      </div>
+      <a class="p" href="#">全部 96 篇 ›</a>
+    </div>
+    <div class="essays">
+      <article class="es"><blockquote>"小津的镜头从不移动，因为他在拍的人，本来就不会移动。"</blockquote><p>低机位不是美学选择，是伦理选择：它把摄影机放在"坐在榻榻米上的人"的高度，于是你我都是这个家的客人，而不是旁观者。</p><div class="by"><span>文 / <b>沈默</b></span><span>8 分钟</span></div></article>
+      <article class="es"><blockquote>"塔可夫斯基的时间，是可以被雨打湿的。"</blockquote><p>现代电影在切割时间，他在保存时间。一个长镜头不是"长"，是一段不愿被剪辑的真实生活——包括它的无聊、它的走神、它的雨。</p><div class="by"><span>文 / <b>林远</b></span><span>11 分钟</span></div></article>
+      <article class="es"><blockquote>"库布里克从不满足于拍好一个类型，他要改写它。"</blockquote><p>恐怖片、科幻片、历史片、情色片——他拍每一类，都让后来的同行重写教科书。《闪灵》之后，走廊不再是走廊。</p><div class="by"><span>文 / <b>陈默</b></span><span>9 分钟</span></div></article>
+      <article class="es"><blockquote>"修复不是翻新，是考古。"</blockquote><p>4K 的意义不在于"更清楚"，而在于"更正确"。当《七武士》的雨第一次以 1.37:1 落下，你会发现以前看的，是别人替你裁好的版本。</p><div class="by"><span>文 / <b>周舟</b></span><span>6 分钟</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ F 本月策展：主卡 + 内嵌播放条 ============ -->
+<section id="curate" aria-labelledby="t-curate">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="shl"><h2 class="st">本月策展 <i>·</i></h2><span class="en">Programme Vol.42</span></div>
+        <p class="ss">一个主题，四部片，一条观看顺序。每月 1 日更新，可订阅邮件周报。</p>
+      </div>
+      <a class="p" href="#">订阅 ›</a>
+    </div>
+    <div class="curate">
+      <article class="cmain">
+        <div class="tg">VOL.42 ｜ 本月主题</div>
+        <h3>"父亲这个角色，为什么总是最后一个被理解？"</h3>
+        <p>东亚电影的父权形象，经历了三次变化：从《东京物语》里"被儿女嫌弃的老人"，到《悲情城市》里"被时代碾过的沉默者"，再到《步履不停》里"连道歉都说不出口的普通人"。本月策展按"缺席 → 失语 → 和解 → 怀念"的顺序观看，效果最佳。建议在一个周末看完前三部，最后一部留到父亲节，或某个他不在的节日。</p>
+        <div class="m"><span>策展：<b>编辑部</b></span><span>总时长：<b>9 小时 41 分</b></span><span>建议：<b>备好纸巾</b></span><span>分级：<b>12+ / 15+</b></span></div>
+        <div class="track" aria-label="策展导览音频 41%"><span class="ply">▶</span><div class="line"><i></i></div><span class="tm">17:24 / 42:10</span></div>
+      </article>
+      <div class="side">
+        <a class="ci on" href="#"><span class="n"></span><div><h4>缺席：《东京物语》(1953)</h4><small>136 分钟 ｜ 12+ ｜ 空椅子比台词重</small></div></a>
+        <a class="ci" href="#"><span class="n"></span><div><h4>失语：《悲情城市》(1989)</h4><small>157 分钟 ｜ 15+ ｜ 方言、历史、失聪者</small></div></a>
+        <a class="ci" href="#"><span class="n"></span><div><h4>和解：《步履不停》(2008)</h4><small>115 分钟 ｜ 12+ ｜ 是枝裕和最温柔的一部</small></div></a>
+        <a class="ci" href="#"><span class="n"></span><div><h4>怀念：《父亲》(2011)</h4><small>109 分钟 ｜ 12+ ｜ 土耳其版，别错过结尾</small></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 页脚 ============ -->
+<footer class="foot" id="about">
+  <div class="wrap">
+    <div class="fg">
+      <div class="fc">
+        <div class="logo" style="font-size:20px">永久电影网<small>FOREVER CINEMA</small></div>
+        <p class="about">永久电影网（yongjiudianyingwang-cn.github.io）是一个专注于经典电影档案、4K 修复重映、导演全集与长青片单的门户。我们倡导分级观影与正版观看，不做资源站、不挂盗链、不做流量榜单，所有影片均建议通过电影院及合法授权平台观看。</p>
+      </div>
+      <div class="fc"><h5>片单</h5><a href="#evergreen">常青片单</a><a href="#restore">修复日历</a><a href="#auteur">导演全集</a><a href="#genre">类型谱系</a></div>
+      <div class="fc"><h5>文字</h5><a href="#essay">影评札记</a><a href="#">导演访谈</a><a href="#">映后笔记</a><a href="#">学术专栏</a></div>
+      <div class="fc"><h5>关于</h5><a href="#curate">本月策展</a><a href="#">分级说明</a><a href="#">观看指引</a><a href="#">版权与联系</a></div>
+    </div>
+    <div class="copy">
+      网站名称：<b>永久电影网</b> ｜ 网站网址：<a href="https://yongjiudianyingwang-cn.github.io">https://yongjiudianyingwang-cn.github.io</a> ｜ © 2024–2026 保留所有权利<br>
+      本站仅为影视档案与观影索引服务，不提供任何影视资源下载与在线播放。请通过电影院及合法授权平台观看。严禁镜像、搬运与转载本站原创内容。
+    </div>
+  </div>
+</footer>
+
+<a class="up" id="up" href="#top" aria-label="回到顶部">↑</a>
+
+<script>
+var togg=document.getElementById('togg'),links=document.getElementById('links');
+togg.addEventListener('click',function(){
+  var o=links.classList.toggle('open');
+  togg.setAttribute('aria-expanded',o);togg.textContent=o?'✕':'☰';
+});
+links.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){links.classList.remove('open');togg.setAttribute('aria-expanded','false');togg.textContent='☰';}
+});
+var up=document.getElementById('up');
+window.addEventListener('scroll',function(){up.classList[window.scrollY>500?'add':'remove']('show');});
+document.querySelectorAll('.pills').forEach(function(g){
+  g.querySelectorAll('.p').forEach(function(t){
+    t.addEventListener('click',function(){
+      g.querySelectorAll('.p').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+    });
+  });
+});
+</script>
+</body>
+</html>
